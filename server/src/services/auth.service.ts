@@ -5,6 +5,7 @@ import { User } from "../models/user.model";
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
+  console.log(email,password);
 
   const user = await User.findOne({ email }).select("password");
   if (!user) return res.status(404).json({ message: "User not found" });
@@ -16,5 +17,5 @@ export const login = async (req: Request, res: Response) => {
     expiresIn: "7D",
   });
 
-  res.json({ token });
+  return res.json({ token });
 };

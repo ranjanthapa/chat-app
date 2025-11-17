@@ -8,7 +8,8 @@ export async function authSocketMiddleware(
   const token = socket.handshake.auth.token;
   if (!token) return next(new Error("Authentication error"));
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    console.log({decoded: decoded})
     socket.data.user = decoded;
     next();
   } catch (error) {
